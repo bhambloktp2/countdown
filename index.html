@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
 <style id="parentStyle">
 @font-face {
   font-family: 'open_sansregular';
@@ -9,10 +10,14 @@
   font-weight: normal;
   font-style: normal;
 }
+html {
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: 'open_sansregular';
+  height: 100%;
 }
 .bg {
   display: block;
@@ -48,6 +53,9 @@ table {
 td {
   padding: 20px 30px;
 }
+td.lesspadding {
+  padding: 20px 20px;
+}
 
 </style>
 <script id="classlist-polyfill">
@@ -56,21 +64,21 @@ if("document" in self){if(!("classList" in document.createElement("_"))){(functi
 </script>
 </head>
 <body>
-<div>
-  <table>
+  <table height="100%">
+    <tr height="20%"><td collspan="5"></td></tr>
     <tr>
       <td><img src="./images/logo.png" width="180px" /></td>
-      <td align="center"><span class="d bg primary-bg"></span><span class="txt primary">Dagen</span></td>
-      <td align="center"><span class="h bg primary-bg"></span><span class="txt primary">Uren</span></td>
-      <td align="center"><span class="m bg primary-bg"></span><span class="txt primary">Minuten</span></td>
+      <td class="lesspadding" align="center"><span class="d bg primary-bg"></span><span class="txt primary">Dagen</span></td>
+      <td class="lesspadding" align="center"><span class="h bg primary-bg"></span><span class="txt primary">Uren</span></td>
+      <td class="lesspadding" align="center"><span class="m bg primary-bg"></span><span class="txt primary">Minuten</span></td>
       <td align="center"><span class="s bg secondary-bg"></span><span class="txt secondary">Seconden</span></td>
     </tr>
     <tr>
       <td colspan="3"></td>
       <td colspan="2" align="right" class="txt tertiary">#proefauditNIAZ<br>#20-21december</td>
     </tr>
+    <tr height="30%"><td collspan="5"></td></tr>
   </table>
-</div>
 <script>
 var parentStyle = document.getElementById('parentStyle').sheet;
 var elD = document.querySelector('.d');
@@ -107,8 +115,10 @@ for(var i=0; i<query.length; i++) {
 date = (new Date(date.split('/')[2] + '/' + date.split('/')[1] + '/' + date.split('/')[0] + ' ' + hour)).getTime();
 
 function addCSSRule(sheet, selector, rules, index) {
+  console.log(sheet);
+  var rules = sheet.rules || sheet.cssRules;
   if(index === undefined) {
-    index = sheet.rules.length;
+    index = rules.length;
   }
   if('insertRule' in sheet) {
     sheet.insertRule(selector + ' {' + rules + '}', index);
@@ -117,8 +127,9 @@ function addCSSRule(sheet, selector, rules, index) {
   }
 }
 function replaceCSS(sheet, needle, replace) {
-  for(var i=0; i<sheet.rules.length; i++) {
-    var text = sheet.rules[i].cssText;
+  var rules = sheet.rules || sheet.cssRules;
+  for(var i=0; i<rules.length; i++) {
+    var text = rules[i].cssText;
     if(text.indexOf(needle)!==-1) {
       text = text.replace(needle,replace);
       sheet.deleteRule(i);
