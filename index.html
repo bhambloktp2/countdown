@@ -115,7 +115,6 @@ for(var i=0; i<query.length; i++) {
 date = (new Date(date.split('/')[2] + '/' + date.split('/')[1] + '/' + date.split('/')[0] + ' ' + hour)).getTime();
 
 function addCSSRule(sheet, selector, rules, index) {
-  console.log(sheet);
   var rules = sheet.rules || sheet.cssRules;
   if(index === undefined) {
     index = rules.length;
