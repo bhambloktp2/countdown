@@ -2,13 +2,50 @@
 <html>
 <head>
 <style id="parentStyle">
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('./fonts/opensans_0-webfont.woff2') format('woff2'),
+        url('./fonts/opensans_0-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   margin: 0;
   padding: 0;
+  font-family: 'open_sansregular';
 }
-#countdown {
+.bg {
+  display: block;
+  color: white;
+  width: 140px;
+  height: 140px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 80px;
+  line-height: 140px;
+}
+.txt {
+  font-size: 32px;
+}
+.primary {
   color: #000001;
 }
+.primary-bg {
+  background-color: #000001;
+}
+.secondary {
+  color: #000002;
+}
+.secondary-bg {
+  background-color: #000002;
+}
+.tertiary {
+  color: #000003;
+}
+td {
+  padding: 20px 30px;
+}
+
 </style>
 <script id="classlist-polyfill">
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
@@ -16,16 +53,34 @@ if("document" in self){if(!("classList" in document.createElement("_"))){(functi
 </script>
 </head>
 <body>
-<div id="countdown"></div>
+<div>
+  <table>
+    <tr>
+      <td><img src="./images/logo.jpg" width="180px" /></td>
+      <td align="center"><span class="d bg primary-bg"></span><span class="txt primary">Dagen</span></td>
+      <td align="center"><span class="h bg primary-bg"></span><span class="txt primary">Uren</span></td>
+      <td align="center"><span class="m bg primary-bg"></span><span class="txt primary">Minuten</span></td>
+      <td align="center"><span class="s bg secondary-bg"></span><span class="txt secondary">Seconden</span></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td colspan="2" align="right" class="txt tertiary">#proefauditNIAZ<br>#20-21december</td>
+    </tr>
+  </table>
+</div>
 <script>
 var parentStyle = document.getElementById('parentStyle').sheet;
-var countdown = document.getElementById('countdown');
+var elD = document.querySelector('.d');
+var elH = document.querySelector('.h');
+var elM = document.querySelector('.m');
+var elS = document.querySelector('.s');
 
 // destructure the search-(query-param)-string into variables with default values;
 var date = '25/12/2017';
 var hour = '00:00:00';
 var primary = '000001';
-var secundary = '000002';
+var secondary = '000002';
+var tertiary = '000003';
 var padding = '2em';
 var query = window.location.search.replace('?','').split('&');
 for(var i=0; i<query.length; i++) {
@@ -37,7 +92,9 @@ for(var i=0; i<query.length; i++) {
       break;
     case 'primary-color': primary = params[1];
       break;
-    case 'secundary-color': secundary = params[1];
+    case 'secondary-color': secondary = params[1];
+      break;
+    case 'tertiary-color': tertiary = params[1];
       break;
     case 'body-padding': padding = params[1];
       break;
@@ -69,8 +126,10 @@ function replaceCSS(sheet, needle, replace) {
 addCSSRule(parentStyle,'body','padding: '+decodeURIComponent(padding).replace(/"|'/ig,'')+';');
 replaceCSS(parentStyle,'#000001','#'+primary);
 replaceCSS(parentStyle,'rgb(0, 0, 1)','#'+primary);
-replaceCSS(parentStyle,'#000002','#'+secundary);
-replaceCSS(parentStyle,'rgb(0, 0, 2)','#'+secundary);
+replaceCSS(parentStyle,'#000002','#'+secondary);
+replaceCSS(parentStyle,'rgb(0, 0, 2)','#'+secondary);
+replaceCSS(parentStyle,'#000003','#'+tertiary);
+replaceCSS(parentStyle,'rgb(0, 0, 3)','#'+tertiary);
 
 setInterval(function() {
   var countdownDate = Math.round((date - Date.now()) / 1000);
@@ -78,7 +137,10 @@ setInterval(function() {
   var m = ((countdownDate - s) / 60) % 60;
   var h = ((countdownDate - (m * 60) - s) / (60 * 60)) % 24;
   var d = ((countdownDate - (h * 60 * 60) - (m * 60) - s) / (60 * 60 * 24));
-  countdown.innerHTML = ' ' + d + 'd ' + h + 'u ' + m + 'm ' + s + 's';
+  elD.innerHTML = d;
+  elH.innerHTML = h;
+  elM.innerHTML = m;
+  elS.innerHTML = s;
 }, 1000);
 
 </script>
