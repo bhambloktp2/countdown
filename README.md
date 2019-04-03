@@ -1,7 +1,7 @@
 > This code has to run on ANY browser!!!! (incl IE6)  
 >
 > That's why it's written in real ugly javascript.  
-> I'm a Polymer evangelist, so I'm ashamed of this code, but hey ... what do you do ...
+> I'm a Web Components evangelist, so I'm truly ashamed of this code, but hey... IE6 => ¯\_(ツ)_/¯
 
 # bhambloktp2 countdown
 https://bhambloktp2.github.io/countdown/
