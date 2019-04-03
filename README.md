@@ -19,3 +19,17 @@ Example: https://bhambloktp2.github.io/countdown/?date=20/12/2017&hour=12:00:00&
 
 
 Example2: https://bhambloktp2.github.io/countdown/?date=20/12/2017&hour=12:00:00&body-padding=2em&primary-color=148798&secondary-color=89BF5A&tertiary-color=EFA34A
+
+
+# LOCAL TIME
+https://bhambloktp2.github.io/countdown/localtime.html
+
+Add options as a query-parameter to this url.
+The following options are available:
+
+  - location [default = 'Benelux']
+  - timezone [default = 0]
+  - primary-color [default = '000000'] // = FOREGROUND COLOR, use rgb values without the hash (#)
+  - secondary-color [default = 'ffffff'] // = BACKGROUND COLOR, use rgb values without the hash (#)
+
+Example: https://bhambloktp2.github.io/countdown/localtime.html?location=Antwerpen&timezone=2&primary-color=ff0000&secondary-color=00ff00
