@@ -30,4 +30,4 @@ The following options are available:
   - timezone [default = 0]
   - primary-color [default = '000000'] // = FOREGROUND COLOR, use rgb values without the hash (#)
 
-Example: https://bhambloktp2.github.io/countdown/localtime.html?timezone=2&primary-color=ff0000
+Example: https://bhambloktp2.github.io/countdown/localtime.html?timezone=2&primary-color=ff0000&font-size=72

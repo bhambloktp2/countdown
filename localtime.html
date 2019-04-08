@@ -46,12 +46,15 @@ var elTime = document.querySelector('.time');
 
 // destructure the search-(query-param)-string into variables with default values;
 var timezone = 0;
+var fontSize = 60;
 var primary = '000000';
 var query = window.location.search.replace('?','').split('&');
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
   switch(params[0]) {
     case 'timezone': timezone = parseInt(params[1], 10);
+      break;
+    case 'font-size': fontSize = parseInt(params[1], 10);
       break;
     case 'primary-color': primary = params[1];
       break;
@@ -82,6 +85,7 @@ function replaceCSS(sheet, needle, replace) {
 }
 replaceCSS(parentStyle,'#000000','#'+primary);
 replaceCSS(parentStyle,'rgb(0, 0, 0)','#'+primary);
+replaceCSS(parentStyle,'60px',fontSize+'px');
 
 var blink = false;
 
