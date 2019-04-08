@@ -27,9 +27,7 @@ https://bhambloktp2.github.io/countdown/localtime.html
 Add options as a query-parameter to this url.
 The following options are available:
 
-  - location [default = 'Benelux']
   - timezone [default = 0]
   - primary-color [default = '000000'] // = FOREGROUND COLOR, use rgb values without the hash (#)
-  - secondary-color [default = 'ffffff'] // = BACKGROUND COLOR, use rgb values without the hash (#)
 
-Example: https://bhambloktp2.github.io/countdown/localtime.html?location=Antwerpen&timezone=2&primary-color=ff0000&secondary-color=00ff00
+Example: https://bhambloktp2.github.io/countdown/localtime.html?timezone=2&primary-color=ff0000

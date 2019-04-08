@@ -12,13 +12,14 @@
 }
 html {
   height: 100%;
+  background-color: transparent;
 }
 body {
   margin: 0;
   padding: 0;
   font-family: 'ITCAvantGardeStd-Bk';
+  background-color: transparent;
   height: 100%;
-  background-color: #ffffff;
   color: #000000;
 }
 table {
@@ -37,32 +38,22 @@ if("document" in self){if(!("classList" in document.createElement("_"))){(functi
 </head>
 <body>
   <table height="100%">
-    <tr><td></td></tr>
-    <tr height="40px"><td>Local Time <span class="myLocation">Benelux</span></td></tr>
-    <tr height="40px"><td class="time"></td></tr>
-    <tr><td></td></tr>
+    <tr><td class="time"></td></tr>
   </table>
 <script>
 var parentStyle = document.getElementById('parentStyle').sheet;
-var elLocation = document.querySelector('.myLocation');
 var elTime = document.querySelector('.time');
 
 // destructure the search-(query-param)-string into variables with default values;
-var myLocation = 'Benelux';
 var timezone = 0;
-var primary = 'ffffff';
-var secondary = '000000';
+var primary = '000000';
 var query = window.location.search.replace('?','').split('&');
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
   switch(params[0]) {
-    case 'location': myLocation = params[1];
-      break;
     case 'timezone': timezone = parseInt(params[1], 10);
       break;
     case 'primary-color': primary = params[1];
-      break;
-    case 'secondary-color': secondary = params[1];
       break;
   }
 }
@@ -91,23 +82,18 @@ function replaceCSS(sheet, needle, replace) {
 }
 replaceCSS(parentStyle,'#000000','#'+primary);
 replaceCSS(parentStyle,'rgb(0, 0, 0)','#'+primary);
-replaceCSS(parentStyle,'#ffffff','#'+secondary);
-replaceCSS(parentStyle,'rgb(255, 255, 255)','#'+secondary);
-
-elLocation.innerHTML = myLocation;
 
 var blink = false;
 
 function updateTime() {
-  d = new Date();
-  utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-  nd = new Date(utc + (3600000 * timezone));
+  var d = new Date();
+  var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  var nd = new Date(utc + (3600000 * timezone));
+  var hours = nd.getHours();
+  var minutes = nd.getMinutes();
   blink = !blink;
-  if (blink) {
-    elTime.innerHTML = nd.getHours() + ':' + nd.getMinutes();
-  } else {
-    elTime.innerHTML = nd.getHours() + ' ' + nd.getMinutes();
-  }
+  var separator = blink ? ':' : ' ';
+  elTime.innerHTML = (hours >= 10 ? '' : '0') + hours + separator + (minutes >= 10 ? '' : '0') + minutes;
 }
 updateTime();
 setInterval(updateTime, 1000);
